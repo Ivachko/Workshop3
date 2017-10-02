@@ -1,4 +1,7 @@
 security:
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
@@ -6,9 +9,6 @@ security:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
-    providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username_email
     firewalls:
         main:
             pattern: ^/
@@ -18,8 +18,10 @@ security:
             logout:       true
             anonymous:    true
 
+
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/*, role: ROLE_USER }
