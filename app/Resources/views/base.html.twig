@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<!-- UserDropDown Structure -->
+
+
+<nav class="black">
+    <div class="nav-wrapper">
+        <a id="logo-container" href="#" class="brand-logo center"><span class="orange-text text-darken-3">{{  block('title') }}</span></a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+        {% if is_granted("ROLE_USER") %}
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><span class="orange-text text-darken-3"></span>Hello {{ app.user.prenom }} </li>
+            <li><a href="#" class="orange-text text-darken-3">Profile</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
+        </ul>
+            <ul class="side-nav" id="mobile-menu">
+                <li><span class="orange-text text-darken-3"></span>Hello {{ app.user.prenom }} </li>
+                <li><a href="#" class="orange-text text-darken-3">Profile</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
+            </ul>
+            <script>$( document ).ready(function(){ $(".button-collapse").sideNav();})
+               </script>
+        {% endif %}
+
+    </div>
+</nav>
+
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="http://materializecss.com/js/init.js"></script>
+</body>
 </html>

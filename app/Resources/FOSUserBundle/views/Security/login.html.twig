@@ -1,0 +1,48 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Login {% endblock %}
+{% block fos_user_content %}
+
+    {% if error %}
+           <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div class="container">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+               <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="email" class="validate" required="required"  id="username" name="_username" value="{{ last_username }}"/>
+                    <label>Email <span class="red-text">(@gfi.fr)</span></label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="password" id="password" name="_password" required="required" class="validate" required="required"/>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="checkbox">
+                       <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                       <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="center">
+                     <input class="btn waves-effect waves-light" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </form>
+    </div>
+{% endblock fos_user_content %}
