@@ -1,65 +1,101 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Needs{% endblock %}
 {% block content %}
-    <h1>Needs list</h1>
+    <div class="center filters">
+        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="status">Status
+            <i id="status" class="material-icons right ml5">arrow_drop_down</i>
+        </button>
+        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="title">Title
+            <i id="title" class="material-icons right ml5">arrow_drop_down</i>
+        </button>
+        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="date">Date
+            <i id="date" class="material-icons right ml5">arrow_drop_down</i>
+        </button>
+        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="customer">Customer
+            <i id="customer" class="material-icons right ml5">arrow_drop_down</i>
+        </button>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Contactname</th>
-                <th>Title</th>
-                <th>Fulldescription</th>
-                <th>Startat</th>
-                <th>Road</th>
-                <th>City</th>
-                <th>Zipcode</th>
-                <th>Rate</th>
-                <th>Consultantname</th>
-                <th>Status</th>
-                <th>Factor1</th>
-                <th>Factor2</th>
-                <th>Factor3</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row center">
+        <div class="input-field col s12">
+            <i class="material-icons prefix colorGFI">search</i>
+            <input type="text" id="autocomplete-input" class="autocomplete colorGFI">
+            <label class="colorGFI" for="autocomplete-input">Search</label>
+        </div>
+    </div>
+
+    <ul class="collection">
+
         {% for need in needs %}
-            <tr>
-                <td><a href="{{ path('need_show', { 'id': need.id }) }}">{{ need.id }}</a></td>
-                <td>{% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ need.contactName }}</td>
-                <td>{{ need.title }}</td>
-                <td>{{ need.fullDescription }}</td>
-                <td>{% if need.startAt %}{{ need.startAt|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ need.road }}</td>
-                <td>{{ need.city }}</td>
-                <td>{{ need.zipCode }}</td>
-                <td>{{ need.rate }}</td>
-                <td>{{ need.consultantName }}</td>
-                <td>{{ need.status }}</td>
-                <td>{{ need.factor1 }}</td>
-                <td>{{ need.factor2 }}</td>
-                <td>{{ need.factor3 }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('need_show', { 'id': need.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('need_edit', { 'id': need.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <li class="collection-item avatar">
+                <i class="circle green"></i>
+                <B><a href="{{ path('need_show',{'id':need.id}) }}">{{ need.title }}</a></B>
+                <p>{{ need.client.nom }} <br>
+                    {% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %}
+                </p>
+                <a id="delete_{{ need.id }}" href="{{ path('need_delete', { 'id': need.id }) }}" need="1" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
+            </li>
 
-    <ul>
-        <li>
-            <a href="{{ path('need_new') }}">Create a new need</a>
-        </li>
+        {% endfor %}
     </ul>
+
+    <div id="modalSuppr" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="orange-text center">Delete a need</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to delete this need (need <span id="todelete"></span>)?</p>
+                <div class="center filters">
+                    <button class="btn nopadding colorBackW orange-text noboxshadow" id="no">No</button>
+                    <button class="btn nopadding colorBackW orange-text noboxshadow" id="yes">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function(){
+
+            $("[id^='delete_']").click(function(){
+                var need = $(this).attr('need');
+                $("#todelete").html(need);
+                $('#modalSuppr').css("display","block");
+            });
+
+            $("#no").click(function(){
+                $('#modalSuppr').css("display","none");
+            });
+
+            $("#yes").click(function(){
+                $('#modalSuppr').css("display","none");
+            });
+
+            $(".btn").click(function(){
+                var filtre = $(this).attr('name');
+                if(filtre == "status" || filtre == "title" || filtre == "date" || filtre == "customer"){
+                    var tri = $(this).children('i').html();
+
+                    $('.btn').removeClass("colorBackGFI");
+
+                    if(filtre != "status") { $('#status').html("arrow_drop_down"); }
+                    if(filtre != "title") { $('#title').html("arrow_drop_down"); }
+                    if(filtre != "date") { $('#date').html("arrow_drop_down"); }
+                    if(filtre != "customer") { $('#customer').html("arrow_drop_down"); }
+
+                    if(tri == "arrow_drop_up"){
+                        tri = "arrow_drop_down";
+                    } else {
+                        tri = "arrow_drop_up";
+                    }
+                    $(this).addClass('colorBackGFI');
+                    $(this).children('i').html(tri);
+                }
+            });
+
+        });
+    </script>
+{% endblock %}
+

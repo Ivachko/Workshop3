@@ -1,72 +1,97 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Need : {{ need.id }}{% endblock %}
 {% block content %}
-    <h1>Need</h1>
+    <div class="container">
+        <ul class="collapsible" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">date_range</i>Date<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span> {% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %} </span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">person</i>Client<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>{{ need.client.nom }}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">contacts</i>Contact name<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>{{ need.contactName }}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">subject</i>Title<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>{{ need.title }}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">description</i>Full description<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>{{ need.fullDescription }}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">assignment_turned_in</i>3 main key success factors<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span><ul>
+                    <li>{{ need.factor1 }}</li>
+                    <li>{{ need.factor2 }}</li>
+                    <li>{{ need.factor3}}</li>
+                    </ul></span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">watch_later</i>Duration<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>A FAIREEEEE URGENT</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">timer</i>Start at the latest<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>{% if need.startAt %}{{ need.startAt|date('Y-m-d') }}{% endif %}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">gps_fixed</i>Location<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span><ul>
+                    <li>{{ need.road }}</li>
+                    <li>{{ need.city }}</li>
+                    <li>{{ need.zipCode }}</li>
+                    </ul></span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">attach_money</i>Rate<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span>{{ need.rate }}</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">folder</i>Description file<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span><p>{{ need.fullDescription }}</p></span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">face</i>Consultants name<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span><p>{{ need.consultantName }}</p></span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" style="position:relative;">
+                    <i class="material-icons">cloud_upload</i>Save & Share<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                        <i class="material-icons">keyboard_arrow_down</i></div></div>
+                <div class="collapsible-body grey lighten-4"><span><a href="#" class="waves-effect waves-light btn blue">Send</a><a href="#" class="waves-effect waves-light btn green">Send</a></span></div>
+            </li>
+        </ul>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ need.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Contactname</th>
-                <td>{{ need.contactName }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ need.title }}</td>
-            </tr>
-            <tr>
-                <th>Fulldescription</th>
-                <td>{{ need.fullDescription }}</td>
-            </tr>
-            <tr>
-                <th>Startat</th>
-                <td>{% if need.startAt %}{{ need.startAt|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Road</th>
-                <td>{{ need.road }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ need.city }}</td>
-            </tr>
-            <tr>
-                <th>Zipcode</th>
-                <td>{{ need.zipCode }}</td>
-            </tr>
-            <tr>
-                <th>Rate</th>
-                <td>{{ need.rate }}</td>
-            </tr>
-            <tr>
-                <th>Consultantname</th>
-                <td>{{ need.consultantName }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ need.status }}</td>
-            </tr>
-            <tr>
-                <th>Factor1</th>
-                <td>{{ need.factor1 }}</td>
-            </tr>
-            <tr>
-                <th>Factor2</th>
-                <td>{{ need.factor2 }}</td>
-            </tr>
-            <tr>
-                <th>Factor3</th>
-                <td>{{ need.factor3 }}</td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
 
     <ul>
         <li>
