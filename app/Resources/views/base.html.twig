@@ -16,7 +16,7 @@
 
 <nav class="black">
     <div class="nav-wrapper">
-        <a id="logo-container" href="#" class="brand-logo center"><span class="orange-text text-darken-3">{{  block('title') }}</span></a>
+       <a id="logo-container" href="#" class="brand-logo center"><span class="orange-text text-darken-3">{{  block('title') }}</span></a>
 
         {% if is_granted("ROLE_USER") %}
             <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -26,8 +26,10 @@
             <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
         </ul>
             <ul class="side-nav" id="mobile-menu">
-                <li><span class="orange-text text-darken-3"></span>Hello {{ app.user.prenom }} </li>
+
+                <li><span class="orange-text text-darken-3">Hello {{ app.user.prenom }} </span></li>
                 <li><a href="#" class="orange-text text-darken-3">Profile</a></li>
+                <li><a href="{{ path('client_index') }}" class="orange-text text-darken-3">Client</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
             </ul>
             <script>$( document ).ready(function(){ $(".button-collapse").sideNav();})
