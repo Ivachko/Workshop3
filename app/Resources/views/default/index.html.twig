@@ -2,16 +2,16 @@
 {% block title %}Needs{% endblock %}
 {% block content %}
 <div class="center filters">
-  <button class="btn waves-effect waves-light nopadding colorBackW orange-text noboxshadow" type="submit" name="status">Status
+  <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="status">Status
     <i id="status" class="material-icons right ml5">arrow_drop_down</i>
   </button>
-  <button class="btn waves-effect waves-light nopadding colorBackW orange-text noboxshadow" type="submit" name="title">Title
+  <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="title">Title
     <i id="title" class="material-icons right ml5">arrow_drop_down</i>
   </button>
-  <button class="btn waves-effect waves-light nopadding colorBackW orange-text noboxshadow" type="submit" name="date">Date
+  <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="date">Date
     <i id="date" class="material-icons right ml5">arrow_drop_down</i>
   </button>
-  <button class="btn waves-effect waves-light nopadding colorBackW orange-text noboxshadow" type="submit" name="customer">Customer
+  <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="customer">Customer
     <i id="customer" class="material-icons right ml5">arrow_drop_down</i>
   </button>
 </div>
@@ -31,7 +31,7 @@
       <p>GOOGLE <br>
       10/01/2017
       </p>
-      <a href="#!" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
+      <a id="delete_1" need="1" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
     </li>
     <li class="collection-item avatar">
       <i class="circle orange"></i>
@@ -39,7 +39,7 @@
       <p>APPLE <br>
       25/04/2017
       </p>
-      <a href="#!" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
+      <a id="delete_2" need="2" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
     </li>
     <li class="collection-item avatar">
       <i class="circle red"></i>
@@ -47,7 +47,7 @@
       <p>AMAZON <br>
       08/08/2017
       </p>
-      <a href="#!" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
+      <a id="delete_3" need="3" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
     </li>
     <li class="collection-item avatar">
       <i class="circle green"></i>
@@ -55,31 +55,64 @@
       <p>MICROSOFT <br>
       15/02/2017
       </p>
-      <a href="#!" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
+      <a id="delete_4" need="4" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
     </li>
   </ul>
 
+<div id="modalSuppr" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="orange-text center">Delete a need</h4>
+    </div>
+    <div class="modal-body">
+      <p>Do you really want to delete this need (need <span id="todelete"></span>)?</p>
+      <div class="center filters">
+        <button class="btn nopadding colorBackW orange-text noboxshadow" id="no">No</button>
+        <button class="btn nopadding colorBackW orange-text noboxshadow" id="yes">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block script %}
 <script>
   $(document).ready(function(){
 
+    $("[id^='delete_']").click(function(){
+      var need = $(this).attr('need');
+      $("#todelete").html(need);
+      $('#modalSuppr').css("display","block");
+    });
+
+    $("#no").click(function(){
+      $('#modalSuppr').css("display","none");
+    });
+
+    $("#yes").click(function(){
+      $('#modalSuppr').css("display","none");
+    });
+
     $(".btn").click(function(){
       var filtre = $(this).attr('name');
-      var tri = $(this).children('i').html();
+      if(filtre == "status" || filtre == "title" || filtre == "date" || filtre == "customer"){
+        var tri = $(this).children('i').html();
 
-      if(filtre != "status") { $('#status').html("arrow_drop_down"); }
-      if(filtre != "title") { $('#title').html("arrow_drop_down"); }
-      if(filtre != "date") { $('#date').html("arrow_drop_down"); }
-      if(filtre != "customer") { $('#customer').html("arrow_drop_down"); }
+        $('.btn').removeClass("colorBackGFI");
 
-      if(tri == "arrow_drop_up"){
-        tri = "arrow_drop_down";
-      } else {
-        tri = "arrow_drop_up";
+        if(filtre != "status") { $('#status').html("arrow_drop_down"); }
+        if(filtre != "title") { $('#title').html("arrow_drop_down"); }
+        if(filtre != "date") { $('#date').html("arrow_drop_down"); }
+        if(filtre != "customer") { $('#customer').html("arrow_drop_down"); }
+
+        if(tri == "arrow_drop_up"){
+          tri = "arrow_drop_down";
+        } else {
+          tri = "arrow_drop_up";
+        }
+        $(this).addClass('colorBackGFI');
+        $(this).children('i').html(tri);
       }
-      $(this).children('i').html(tri);
     });
 
   });
