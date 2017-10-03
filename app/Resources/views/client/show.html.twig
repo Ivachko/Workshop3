@@ -1,0 +1,32 @@
+{% block title %}Client {{ client.nom }} {% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Client</h1>
+    <ul class="collection">
+        <li class="collection-item avatar">
+            <img class="responsive-img circle" src="{{ asset('uploads/client_logo/' ~ client.logo) }}"/>
+            <span class="title">{{ client.nom }}</span>
+            <p><a href="https://www.societe.com/cgi-bin/search?champs={{ client.siret }}"> {{ client.siret }}</a></p>
+
+
+        </li>
+
+    </ul>
+
+
+
+ 
+            <a href="{{ path('client_index') }}">Back to the list</a>
+    <div class="row">
+        <div class="col s2">   <a class="btn waves-effect waves-light blue" href="{{ path('client_edit', { 'id': client.id }) }}">Edit</a></div>
+        <div class="col s2"> {{ form_start(delete_form) }}
+            <input class="btn waves-effect waves-light red" type="submit" value="Delete">
+            {{ form_end(delete_form) }}</div>
+    </div>
+
+
+
+        </li>
+    </ul>
+{% endblock %}
