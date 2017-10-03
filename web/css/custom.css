@@ -1,0 +1,55 @@
+.addNeed {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 !important;
+}
+
+.colorBackGFI {
+    background-color: #2f354a;
+}
+
+.colorGFI {
+    color: #2f354a;
+}
+
+.ml10{
+  margin-left: 10px;
+}
+
+.nopadding {
+    padding:0 5px !important;
+}
+
+.filters {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.colorBackW {
+    background-color: #ffffff;
+}
+
+.noboxshadow {
+    box-shadow: 0 0 0 0;
+}
+
+.btn:hover{
+    box-shadow: 0 0 0 0 !important;
+    background-color: #2f354a;
+}
+
+.ml5{
+    margin-left: 5px !important;
+}
+.active{
+  color: #2f354a !important;
+}
+
+#autocomplete-input{
+  border-bottom: 1px solid #2f354a !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.btn{
+  font-size: 12px !important;
+}

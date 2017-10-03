@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
-
+    <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}{% endblock %}</title>
@@ -14,26 +14,21 @@
 <!-- UserDropDown Structure -->
 
 
-<nav class="black">
+<nav class="colorBackGFI">
     <div class="nav-wrapper">
        <a id="logo-container" href="#" class="brand-logo center"><span class="orange-text text-darken-3">{{  block('title') }}</span></a>
 
         {% if is_granted("ROLE_USER") %}
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><span class="orange-text text-darken-3">Hello {{ app.user.prenom }} </span></li>
+        <ul id="nav-mobile" class="right">
+            <li> <a class="btn-floating btn-large waves-effect waves-light colorBackGFI addNeed noboxshadow"><i class="material-icons orange-text">add</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-menu">
+            <li><h5 class="colorGFI ml10"> {{ app.user.prenom }} </h5></li>
             <li><a href="#" class="orange-text text-darken-3">Profile</a></li>
+            <li><a href="{{ path('client_index') }}" class="orange-text text-darken-3">Customers</a></li>
             <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
         </ul>
-            <ul class="side-nav" id="mobile-menu">
-
-                <li><span class="orange-text text-darken-3">Hello {{ app.user.prenom }} </span></li>
-                <li><a href="#" class="orange-text text-darken-3">Profile</a></li>
-                <li><a href="{{ path('client_index') }}" class="orange-text text-darken-3">Client</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
-            </ul>
-            <script>$( document ).ready(function(){ $(".button-collapse").sideNav();})
-               </script>
         {% endif %}
 
     </div>
@@ -46,8 +41,14 @@
 
 
 <!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-3.2.1.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="http://materializecss.com/js/init.js"></script>
+
+<script>
+  $(document).ready(function(){ $(".button-collapse").sideNav();})
+</script>
+{% block script %}{% endblock %}
 </body>
+
 </html>
