@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edit Client {{ client.nom }}{% endblock %}
+{% block content %}
+    <div class="container">
+    <h1>Client edit {{ client.nom }}</h1>
+
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+    {{ form_row(edit_form.logo) }}<br>
+      {{ form_row(edit_form.save) }}
+                {{ form_start(delete_form) }}
+                <input type="submit" class="btn waves-effect waves-light red" value="Delete">
+                {{ form_end(delete_form) }}
+    {{ form_end(edit_form) }}
+
+
+    <ul>
+        <li>
+
+        </li>
+        <li>
+
+        </li>
+    </ul>
+    </div>
+{% endblock %}

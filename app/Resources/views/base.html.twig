@@ -17,8 +17,9 @@
 <nav class="black">
     <div class="nav-wrapper">
         <a id="logo-container" href="#" class="brand-logo center"><span class="orange-text text-darken-3">{{  block('title') }}</span></a>
-        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
         {% if is_granted("ROLE_USER") %}
+            <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><span class="orange-text text-darken-3"></span>Hello {{ app.user.prenom }} </li>
             <li><a href="#" class="orange-text text-darken-3">Profile</a></li>

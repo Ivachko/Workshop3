@@ -1,0 +1,20 @@
+{% block title %}Client List{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+    <h1>Clients list</h1>
+    {% for client in clients %}
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <img class="responsive-img circle" src="{{ asset('uploads/client_logo/' ~ client.logo) }}"/>
+                <span class="title">{{ client.nom }}</span>
+                <p><a href="https://www.societe.com/cgi-bin/search?champs={{ client.siret }}"> {{ client.siret }}</a></p>
+                <p><a href="{{ path('client_show', { 'id': client.id }) }}"><i class="material-icons">remove_red_eye</i></a><br>
+                <a href="{{ path('client_edit', { 'id': client.id }) }}" class="secondary-content"><i class="material-icons blue-text">edit</i></a>
+            </li>
+
+        </ul>
+        {% endfor %}
+
+{% endblock %}
