@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Needs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Contactname</th>
+                <th>Title</th>
+                <th>Fulldescription</th>
+                <th>Startat</th>
+                <th>Road</th>
+                <th>City</th>
+                <th>Zipcode</th>
+                <th>Rate</th>
+                <th>Consultantname</th>
+                <th>Status</th>
+                <th>Factor1</th>
+                <th>Factor2</th>
+                <th>Factor3</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for need in needs %}
+            <tr>
+                <td><a href="{{ path('need_show', { 'id': need.id }) }}">{{ need.id }}</a></td>
+                <td>{% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ need.contactName }}</td>
+                <td>{{ need.title }}</td>
+                <td>{{ need.fullDescription }}</td>
+                <td>{% if need.startAt %}{{ need.startAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ need.road }}</td>
+                <td>{{ need.city }}</td>
+                <td>{{ need.zipCode }}</td>
+                <td>{{ need.rate }}</td>
+                <td>{{ need.consultantName }}</td>
+                <td>{{ need.status }}</td>
+                <td>{{ need.factor1 }}</td>
+                <td>{{ need.factor2 }}</td>
+                <td>{{ need.factor3 }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('need_show', { 'id': need.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('need_edit', { 'id': need.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('need_new') }}">Create a new need</a>
+        </li>
+    </ul>
+{% endblock %}

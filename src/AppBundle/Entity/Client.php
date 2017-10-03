@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -43,6 +45,16 @@ class Client
      * @ORM\Column(name="Siret", type="string",length=15)
      */
     private $siret;
+
+    /**
+     * One client has Many needs.
+     * @OneToMany(targetEntity="Need", mappedBy="client")
+     */
+    private $needs;
+
+    public function __construct() {
+        $this->features = new ArrayCollection();
+    }
 
 
     /**
@@ -125,5 +137,39 @@ class Client
     public function getSiret()
     {
         return $this->siret;
+    }
+
+    /**
+     * Add need
+     *
+     * @param \AppBundle\Entity\Need $need
+     *
+     * @return Client
+     */
+    public function addNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs[] = $need;
+
+        return $this;
+    }
+
+    /**
+     * Remove need
+     *
+     * @param \AppBundle\Entity\Need $need
+     */
+    public function removeNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs->removeElement($need);
+    }
+
+    /**
+     * Get needs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNeeds()
+    {
+        return $this->needs;
     }
 }

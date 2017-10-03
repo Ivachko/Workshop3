@@ -3,6 +3,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,10 +31,17 @@ class User extends BaseUser
 
     public function __construct()
     {
-
+        $this->features = new ArrayCollection();
         parent::__construct();
 
     }
+    /**
+     * One client has Many needs.
+     * @OneToMany(targetEntity="Need", mappedBy="commercial")
+     */
+    private $needs;
+
+
 
     /**
      * Set nom
@@ -80,5 +89,39 @@ class User extends BaseUser
     public function getPrenom()
     {
         return $this->prenom;
+    }
+
+    /**
+     * Add need
+     *
+     * @param \AppBundle\Entity\Need $need
+     *
+     * @return User
+     */
+    public function addNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs[] = $need;
+
+        return $this;
+    }
+
+    /**
+     * Remove need
+     *
+     * @param \AppBundle\Entity\Need $need
+     */
+    public function removeNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs->removeElement($need);
+    }
+
+    /**
+     * Get needs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNeeds()
+    {
+        return $this->needs;
     }
 }
