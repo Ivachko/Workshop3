@@ -110,6 +110,24 @@ class Need
      */
 
     private $commercial;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="factor1", type="text")
+     */
+    private $factor1;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="factor2", type="text")
+     */
+    private $factor2;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="factor3", type="text")
+     */
+    private $factor3;
 
     /**
      * Get id
@@ -455,5 +473,77 @@ class Need
     public function getCommercial()
     {
         return $this->commercial;
+    }
+
+    /**
+     * Set factor1
+     *
+     * @param string $factor1
+     *
+     * @return Need
+     */
+    public function setFactor1($factor1)
+    {
+        $this->factor1 = $factor1;
+
+        return $this;
+    }
+
+    /**
+     * Get factor1
+     *
+     * @return string
+     */
+    public function getFactor1()
+    {
+        return $this->factor1;
+    }
+
+    /**
+     * Set factor2
+     *
+     * @param string $factor2
+     *
+     * @return Need
+     */
+    public function setFactor2($factor2)
+    {
+        $this->factor2 = $factor2;
+
+        return $this;
+    }
+
+    /**
+     * Get factor2
+     *
+     * @return string
+     */
+    public function getFactor2()
+    {
+        return $this->factor2;
+    }
+
+    /**
+     * Set factor3
+     *
+     * @param string $factor3
+     *
+     * @return Need
+     */
+    public function setFactor3($factor3)
+    {
+        $this->factor3 = $factor3;
+
+        return $this;
+    }
+
+    /**
+     * Get factor3
+     *
+     * @return string
+     */
+    public function getFactor3()
+    {
+        return $this->factor3;
     }
 }

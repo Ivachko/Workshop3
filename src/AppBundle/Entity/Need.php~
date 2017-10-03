@@ -110,6 +110,24 @@ class Need
      */
 
     private $commercial;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="factor1", type="text")
+     */
+    private $factor1;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="factor2", type="text")
+     */
+    private $factor2;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="factor3", type="text")
+     */
+    private $factor3;
 
     /**
      * Get id
@@ -431,5 +449,29 @@ class Need
     public function getClient()
     {
         return $this->client;
+    }
+
+    /**
+     * Set commercial
+     *
+     * @param \AppBundle\Entity\User $commercial
+     *
+     * @return Need
+     */
+    public function setCommercial(\AppBundle\Entity\User $commercial = null)
+    {
+        $this->commercial = $commercial;
+
+        return $this;
+    }
+
+    /**
+     * Get commercial
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getCommercial()
+    {
+        return $this->commercial;
     }
 }

@@ -90,4 +90,38 @@ class User extends BaseUser
     {
         return $this->prenom;
     }
+
+    /**
+     * Add need
+     *
+     * @param \AppBundle\Entity\Need $need
+     *
+     * @return User
+     */
+    public function addNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs[] = $need;
+
+        return $this;
+    }
+
+    /**
+     * Remove need
+     *
+     * @param \AppBundle\Entity\Need $need
+     */
+    public function removeNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs->removeElement($need);
+    }
+
+    /**
+     * Get needs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNeeds()
+    {
+        return $this->needs;
+    }
 }

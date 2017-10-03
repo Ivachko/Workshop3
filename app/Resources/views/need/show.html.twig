@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Need</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ need.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Contactname</th>
+                <td>{{ need.contactName }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ need.title }}</td>
+            </tr>
+            <tr>
+                <th>Fulldescription</th>
+                <td>{{ need.fullDescription }}</td>
+            </tr>
+            <tr>
+                <th>Startat</th>
+                <td>{% if need.startAt %}{{ need.startAt|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Road</th>
+                <td>{{ need.road }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ need.city }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ need.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>{{ need.rate }}</td>
+            </tr>
+            <tr>
+                <th>Consultantname</th>
+                <td>{{ need.consultantName }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ need.status }}</td>
+            </tr>
+            <tr>
+                <th>Factor1</th>
+                <td>{{ need.factor1 }}</td>
+            </tr>
+            <tr>
+                <th>Factor2</th>
+                <td>{{ need.factor2 }}</td>
+            </tr>
+            <tr>
+                <th>Factor3</th>
+                <td>{{ need.factor3 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('need_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('need_edit', { 'id': need.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
