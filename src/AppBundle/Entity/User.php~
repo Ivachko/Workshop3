@@ -3,6 +3,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,10 +31,17 @@ class User extends BaseUser
 
     public function __construct()
     {
-
+        $this->features = new ArrayCollection();
         parent::__construct();
 
     }
+    /**
+     * One client has Many needs.
+     * @OneToMany(targetEntity="Need", mappedBy="commercial")
+     */
+    private $needs;
+
+
 
     /**
      * Set nom
