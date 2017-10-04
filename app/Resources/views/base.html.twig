@@ -21,13 +21,14 @@
         {% if is_granted("ROLE_USER") %}
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right">
-            <li> <a class="btn-floating btn-large colorBackGFI addNeed noboxshadow"><i class="material-icons orange-text">add</i></a></li>
+            <li> <a class="btn-floating btn-large colorBackGFI addNeed noboxshadow"><i class="material-icons orange-text">{% block btn %}{% endblock %}</i></a></li>
         </ul>
         <ul class="side-nav" id="mobile-menu">
-            <li><h5 class="colorGFI ml10"> {{ app.user.prenom }} </h5></li>
-            <li><a href="#" class="orange-text text-darken-3">Profile</a></li>
-            <li><a href="{{ path('client_index') }}" class="orange-text text-darken-3">Customers</a></li>
-            <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3">Logout</a></li>
+            <li><h5 class="colorGFI ml10"> {{ app.user.prenom }} {{ app.user.nom }} </h5></li>
+            <li><a href="{{ path('need_index') }}" class="orange-text text-darken-3"><i class="material-icons orange-text">home</i>Home</a></li>
+            <li><a href="#" class="orange-text text-darken-3"><i class="material-icons orange-text">account_circle</i>Profile</a></li>
+            <li><a href="{{ path('client_index') }}" class="orange-text text-darken-3"><i class="material-icons orange-text">people</i>Customers</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3"><i class="material-icons orange-text">power_settings_new</i>Logout</a></li>
         </ul>
         {% endif %}
 
