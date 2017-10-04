@@ -87,3 +87,23 @@
 .modal-body {
     padding: 7px 34px;
 }
+
+.chip {
+    color: #ff9800 !important;
+    background-color: #2f354a !important;
+}
+
+.customcheck{
+      margin-top: 15px;
+      color: #ff9800 !important;
+      background-color: #2f354a !important;
+}
+
+#toast-container {
+    top: 9% !important;
+}
+
+.toast {
+    color: #ff9800 !important;
+    background-color: #2f354a !important;
+}

@@ -130,6 +130,21 @@ class Need
     private $factor3;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="needs")
+     * @ORM\JoinTable(name="needs_tags")
+     */
+    private $tags;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+      {
+       $this->tags = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -545,5 +560,39 @@ class Need
     public function getFactor3()
     {
         return $this->factor3;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return Need
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -33,9 +33,8 @@
                 <p>{{ need.client.nom }} <br>
                     {% if need.date %}{{ need.date|date('Y-m-d') }}{% endif %}
                 </p>
-                <a id="delete_{{ need.id }}" href="{{ path('need_delete', { 'id': need.id }) }}" need="1" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
+                <a id="delete_{{ need.id }}" need="{{ need.id }}" need-name="{{ need.title }}" class="secondary-content"><i class="material-icons colorGFI">delete</i></a>
             </li>
-
         {% endfor %}
     </ul>
 
@@ -45,7 +44,7 @@
                 <h4 class="orange-text center">Delete a need</h4>
             </div>
             <div class="modal-body">
-                <p>Do you really want to delete this need (need <span id="todelete"></span>)?</p>
+                <p>Do you really want to delete the need "<span id="needname"></span>" (id: <span id="todelete"></span>) ?</p>
                 <div class="center filters">
                     <button class="btn nopadding colorBackW orange-text noboxshadow" id="no">No</button>
                     <button class="btn nopadding colorBackW orange-text noboxshadow" id="yes">Yes</button>
@@ -58,10 +57,19 @@
 {% block script %}
     <script>
         $(document).ready(function(){
+          {% if toastr == "shared" %}
+            Materialize.toast('Need shared with contributor(s) !', 3000, 'rounded');
+          {% endif %}
+
+          {% if toastr == "deleted" %}
+            Materialize.toast('Need has been deleted !', 3000, 'rounded');
+          {% endif %}
 
             $("[id^='delete_']").click(function(){
                 var need = $(this).attr('need');
+                var need_name = $(this).attr('need-name');
                 $("#todelete").html(need);
+                $("#needname").html(need_name);
                 $('#modalSuppr').css("display","block");
             });
 
@@ -71,6 +79,11 @@
 
             $("#yes").click(function(){
                 $('#modalSuppr').css("display","none");
+                var id = $("#todelete").html();
+                var url = "{{ path('need_delete', { 'id': 'need_id'}) }}";
+                url = url.replace("need_id", id);
+
+                document.location.href = url;
             });
 
             $(".btn").click(function(){
@@ -98,4 +111,3 @@
         });
     </script>
 {% endblock %}
-

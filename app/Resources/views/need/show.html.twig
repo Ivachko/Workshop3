@@ -87,7 +87,10 @@
                 <div class="collapsible-header" style="position:relative;">
                     <i class="material-icons">cloud_upload</i>Save & Share<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
                         <i class="material-icons">keyboard_arrow_down</i></div></div>
-                <div class="collapsible-body grey lighten-4"><span><a href="#" class="waves-effect waves-light btn blue">Send</a><a href="#" class="waves-effect waves-light btn green">Send</a></span></div>
+                <div class="collapsible-body grey lighten-4">
+                  <span>
+                    <a href="{{ path('need_share', { 'id': need.id }) }}" class="waves-effect waves-light btn blue">Send</a>
+                  </span></div>
             </li>
         </ul>
 
