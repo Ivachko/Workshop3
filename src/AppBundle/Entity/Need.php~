@@ -130,6 +130,21 @@ class Need
     private $factor3;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="needs")
+     * @ORM\JoinTable(name="needs_tags")
+     */
+    private $tags;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+      {
+       $this->tags = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block title %}Need sharing{% endblock %}
+{% block content %}
+  <h5>Need saved, chose contributors wich who it will be share: </h5>
+  <ul class="collection">
+    {% for key,devCompatible in devsCompatibles %}
+    <li class="collection-item avatar">
+      <i class="material-icons circle customcheck" mail="{{ key }}" id="{{ key }}">check</i>
+        <span><b>{{ key }}</b></span>
+        <p><b>{{ devCompatible }}</b> common tags:<p>
+        {% for keyt,tagCommun in tagsCommuns %}
+          {% if keyt == key %}
+          <ul>
+            {% for keytc,tag in tagCommun %}
+            <div class="chip">{{ tag }}</div>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        {% endfor %}
+    </li>
+    {% endfor %}
+  </ul>
+  <button class="btn colorBackGFI orange-text right" type="submit" id="share" name="action">
+    Share to <span id="nbDev"></span> contributors
+    <i class="material-icons right">send</i>
+  </button>
+
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function(){
+
+          var nb = 0;
+          $(".customcheck").each(function() {
+            nb++;
+          });
+          $("#nbDev").html(nb)
+
+          $(".customcheck").click(function(){
+              var check = $(this).html();
+              if(check == "check"){
+                  check = "";
+              } else {
+                  check = "check";
+              }
+              $(this).html(check);
+
+              var toutvide = true;
+              var nb = 0;
+              $(".customcheck").each(function() {
+                if($(this).html() == "check"){
+                    toutvide = false;
+                    nb++;
+                }
+              });
+              if(toutvide){
+                $(".btn").addClass("disabled");
+              } else {
+                $(".btn").removeClass("disabled");
+              }
+              $("#nbDev").html(nb)
+          });
+
+          $("#share").click(function(){
+              var mails = [];
+
+              $(".customcheck").each(function() {
+                if($(this).html() == "check"){
+                    mails.push($(this).attr('mail'));
+                }
+              });
+
+                /* envoi de mail ? */
+
+              var url = "{{ path('need_index_toastr', { 'toastr': 'shared' }) }}";
+
+              document.location.href = url;
+
+          });
+
+        });
+    </script>
+{% endblock %}
