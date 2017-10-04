@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Need sharing{% endblock %}
+{% block btn %}{% endblock %}
 {% block content %}
   <h5>Need saved, chose contributors wich who it will be share: </h5>
   <ul class="collection">
@@ -73,7 +74,7 @@
 
                 /* envoi de mail ? */
 
-              var url = "{{ path('need_index'}}";
+              var url = "{{ path('need_index') }}";
 
               document.location.href = url;
 

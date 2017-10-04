@@ -21,7 +21,7 @@ class NeedController extends Controller
      *
      * @Method("GET")
      */
-    public function indexAction($toastr = "")
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -29,7 +29,6 @@ class NeedController extends Controller
 
         return $this->render('need/index.html.twig', array(
             'needs' => $needs,
-            'toastr' => $toastr,
         ));
     }
 
@@ -83,7 +82,7 @@ class NeedController extends Controller
     /**
      * Finds and share a need entity.
      *
-     * @Route("/n/{id}/share", name="need_share")
+     * @Route("/{id}/share", name="need_share")
      * @Method("GET")
      */
     public function shareAction(Need $need)
@@ -123,7 +122,7 @@ class NeedController extends Controller
     /**
      * Displays a form to edit an existing need entity.
      *
-     * @Route("/n/{id}/edit", name="need_edit")
+     * @Route("/{id}/edit", name="need_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Need $need)
@@ -148,8 +147,8 @@ class NeedController extends Controller
     /**
      * Deletes a need entity.
      *
-     * @Route("/n/{id}/delete", name="need_delete")
-     * @Method({"GET", "DELETE"})
+     * @Route("/{id}/delete", name="need_delete")
+     * @Method("DELETE")
      */
     public function deleteAction(Request $request, Need $need)
     {
@@ -162,7 +161,7 @@ class NeedController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('need_index_toastr', array('toastr' => 'deleted'));
+        return $this->redirectToRoute('need_index');
     }
 
     /**
