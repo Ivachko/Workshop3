@@ -1,21 +1,162 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Need creation</h1>
-
     {{ form_start(form) }}
-
-
-    {{ form_end(form) }}
-
-    <ul>
+    <ul class="collapsible" data-collapsible="expandable">
         <li>
-            <a href="{{ path('need_index') }}">Back to the list</a>
+            <div class="collapsible-header" style="position:relative;">
+                <i class="material-icons">work</i>Customer<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                    <i class="material-icons">keyboard_arrow_down</i></div></div>
+            <div class="collapsible-body grey lighten-4" style="padding:0 0 0 1em;">
+                <ul class="collapsible" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">date_range</i>Date<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span>{{ form_row(form.date) }}</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">person</i>Client / Contact Name<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4">
+                            <span>{{ form_row(form.client) }}</span>
+                            <span>{{ form_row(form.contactName) }}</span>
+                            <div id="meetposition">
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header" style="position:relative;">
+                <i class="material-icons">format_align_justify</i>Need<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                    <i class="material-icons">keyboard_arrow_down</i></div></div>
+            <div class="collapsible-body grey lighten-4" style="padding:0 0 0 1em;">
+                <ul class="collapsible" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">subject</i>Title<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.title) }}</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">description</i>Full description<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.fullDescription) }}</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">assignment_turned_in</i>3 main key success factors<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4">
+                            <span>
+                                <ul>
+                                    <li> {{ form_row(form.factor1) }}</li>
+                                    <li> {{ form_row(form.factor2) }}</li>
+                                    <li> {{ form_row(form.factor3) }}</li>
+                                </ul>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">watch_later</i>Duration<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span>A faire</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">timer</i>Start at the latest<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.startAt) }}</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">gps_fixed</i>Location<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4">
+                            <span><ul>
+                                <li> {{ form_row(form.road) }}</li>
+                                <li> {{ form_row(form.city) }}</li>
+                                <li> {{ form_row(form.zipCode) }}</li>
+                                </ul></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">attach_money</i>Rate<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.rate) }}</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">folder</i>Description file<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.fullDescription) }}</span></div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header" style="position:relative;">
+                <i class="material-icons">face</i>Consultants name<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                    <i class="material-icons">keyboard_arrow_down</i></div></div>
+            <div class="collapsible-body grey lighten-4">
+                {{ form_row(form.consultantName) }}
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header active" style="position:relative;">
+                <i class="material-icons">remove_red_eye</i>Status<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                    <i class="material-icons">keyboard_arrow_down</i></div></div>
+            <div class="collapsible-body grey lighten-4">
+                {{ form_row(form.status) }}
+            </div>
         </li>
     </ul>
+    {{ form_row(form.save) }}
+    {{ form_end(form) }}
+
 
 {% endblock %}
 {% block script%}
+
+    <script>
+        $(document).ready(function () {
+            $(':input[name="appbundle_need[client]"]').on("change", function(){
+
+            contacturl = contacturl.replace("1",$(this).val());
+            $.ajax({
+
+                url: contacturl,
+                success: function(response){
+                    // Replace current position field ...
+                    $('#meetposition').replaceWith(
+                    var parse = jQuery.parseJSON(response)
+                    var $contactselect = $(':input[name="appbundle_need[contactName]"]');
+                    ($contactselect.html('<option>Contact :</option>'));
+
+                    for (var i=0, total = parse.length; i < total; i++) {
+
+                        $contactselect.append('<option value="' + parse[i].id + '"><span class="red-text">' + parse[i].name + '</span></option>');
+                    }
+                    $('select').material_select();
+
+                        $(html).find('#meetposition')
+                    );
+
+                }
+            });
+        });
+        var contacturl = "{{ path('client_contact',{id:"1"}) }}";
+
+    </script>
     <script>
         $(document).ready(function () {
             $(':input[name="appbundle_need[client]"]').on("change", function(){
@@ -30,7 +171,7 @@
                         console.log(response);
                         var $contactselect = $(':input[name="appbundle_need[contactName]"]');
 
-                        $contactselect.html('<option>Contact :</option>');
+                        ($contactselect.html('<option>Contact :</option>'));
 
                         for (var i=0, total = parse.length; i < total; i++) {
 
@@ -44,4 +185,17 @@
         });
         var contacturl = "{{ path('client_contact',{id:"1"}) }}";
     </script>
+    <script>
+
+        $(".collapsible-header").click(function(){
+            var chevron = $(this).children('div').children('i').html();
+            if(chevron == "keyboard_arrow_down"){
+                chevron = "keyboard_arrow_up";
+            } else {
+                chevron = "keyboard_arrow_down";
+            }
+            $(this).children('div').children('i').html(chevron);
+        });
+    </script>
+
 {% endblock %}

@@ -158,7 +158,7 @@ class ClientController extends Controller
         $normalizer = new ObjectNormalizer();
 
         $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getName();
+            return $object->getId();
         });
 
         $serializer = new Serializer(array($normalizer), array($encoder));
