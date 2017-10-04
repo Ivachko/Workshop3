@@ -40,11 +40,14 @@ class NeedController extends Controller
     public function newAction(Request $request)
     {
         $need = new Need();
+
         $form = $this->createForm('AppBundle\Form\NeedType', $need);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+            $need->setCommercial($this->getUser());
             $em->persist($need);
             $em->flush();
 

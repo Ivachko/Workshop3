@@ -62,6 +62,6 @@ swiftmailer:
   username: "%mailer_user%"
 twig: 
   debug: "%kernel.debug%"
-  form_themes: 
+  form_themes:
     - 'materialize_layout.html.twig'
   strict_variables: "%kernel.debug%"

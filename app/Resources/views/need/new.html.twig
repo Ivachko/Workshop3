@@ -4,8 +4,8 @@
     <h1>Need creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+
+
     {{ form_end(form) }}
 
     <ul>
@@ -14,4 +14,34 @@
         </li>
     </ul>
 
+{% endblock %}
+{% block script%}
+    <script>
+        $(document).ready(function () {
+            $(':input[name="appbundle_need[client]"]').on("change", function(){
+                contacturl = contacturl.replace("1",$(this).val());
+
+                $.ajax({
+
+                    url: contacturl,
+                    success: function(response){
+                        var parse = jQuery.parseJSON(response)
+                        console.log(parse);
+                        console.log(response);
+                        var $contactselect = $(':input[name="appbundle_need[contactName]"]');
+
+                        $contactselect.html('<option>Contact :</option>');
+
+                        for (var i=0, total = parse.length; i < total; i++) {
+
+                            $contactselect.append('<option value="' + parse[i].id + '"><span class="red-text">' + parse[i].name + '</span></option>');
+                        }
+                        $('select').material_select();
+                    },
+
+                });
+            })
+        });
+        var contacturl = "{{ path('client_contact',{id:"1"}) }}";
+    </script>
 {% endblock %}
