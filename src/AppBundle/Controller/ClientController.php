@@ -5,7 +5,14 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Client controller.
@@ -141,5 +148,24 @@ class ClientController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    /**
+     * @Route("/{id}/contact", name="client_contact")
+     * @Method("GET")
+     */
+    public function getContactAction(Client $client){
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getName();
+        });
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+        $jsonContent = $serializer->serialize($client->getContacts(), 'json');
+        return new Response($jsonContent);
+
+
+
     }
 }

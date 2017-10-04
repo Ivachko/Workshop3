@@ -29,9 +29,9 @@ class Need
     private $date;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="contactName", type="string", length=255)
+     * Many Need have One Contact.
+     * @ORM\ManyToOne(targetEntity="Contact", inversedBy="needs")
+     * @ORM\JoinColumn(name="contactName", referencedColumnName="id")
      */
     private $contactName;
 
@@ -105,7 +105,7 @@ class Need
     private $client;
     /**
      * Many Need have One .
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="needs")
      * @ORM\JoinColumn(name="commerical_id", referencedColumnName="id")
      */
 

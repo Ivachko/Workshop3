@@ -53,9 +53,17 @@ class Client
     private $needs;
 
     public function __construct() {
-        $this->features = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+        $this->needs = new ArrayCollection();
     }
 
+    /**
+     * One client has Many needs.
+     * @OneToMany(targetEntity="Contact", mappedBy="client")
+     */
+    private $contacts;
+
+  
 
     /**
      * Get id
@@ -171,5 +179,39 @@ class Client
     public function getNeeds()
     {
         return $this->needs;
+    }
+
+    /**
+     * Add contact
+     *
+     * @param \AppBundle\Entity\Contact $contact
+     *
+     * @return Client
+     */
+    public function addContact(\AppBundle\Entity\Contact $contact)
+    {
+        $this->contacts[] = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Remove contact
+     *
+     * @param \AppBundle\Entity\Contact $contact
+     */
+    public function removeContact(\AppBundle\Entity\Contact $contact)
+    {
+        $this->contacts->removeElement($contact);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
     }
 }
