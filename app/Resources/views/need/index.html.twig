@@ -57,13 +57,6 @@
 {% block script %}
     <script>
         $(document).ready(function(){
-          {% if toastr == "shared" %}
-            Materialize.toast('Need shared with contributor(s) !', 3000, 'rounded');
-          {% endif %}
-
-          {% if toastr == "deleted" %}
-            Materialize.toast('Need has been deleted !', 3000, 'rounded');
-          {% endif %}
 
             $("[id^='delete_']").click(function(){
                 var need = $(this).attr('need');
