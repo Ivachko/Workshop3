@@ -1,3 +1,32 @@
+
+
+.chipopen  {
+    position: absolute;
+    margin-top: 15px;
+    left: 8px;
+}
+.chiplost  {
+    color:red !important;
+    position: absolute;
+    margin-top: 15px;
+    left: 8px;
+}
+.chipwin  {
+    color:green !important;
+    position: absolute;
+    margin-top: 15px;
+    left: 12px;
+}
+.chip {
+    color: #ff9800;
+    background-color: #2f354a;
+}
+
+.customcheck{
+    margin-top: 15px;
+    color: #ff9800 !important;
+    background-color: #2f354a !important;
+}
 .addNeed {
     width: 50px !important;
     height: 50px !important;
@@ -13,7 +42,7 @@
 }
 
 .ml10{
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .nopadding {
@@ -43,16 +72,16 @@
 }
 
 .active{
-  color: #2f354a !important;
+    color: #2f354a !important;
 }
 
 #autocomplete-input{
-  border-bottom: 1px solid #2f354a !important;
-  box-shadow: 0 0 0 0 !important;
+    border-bottom: 1px solid #2f354a !important;
+    box-shadow: 0 0 0 0 !important;
 }
 
 .btn{
-  font-size: 12px !important;
+    font-size: 12px !important;
 }
 
 /* The Modal (background) */
@@ -86,24 +115,4 @@
 }
 .modal-body {
     padding: 7px 34px;
-}
-
-.chip {
-    color: #ff9800 !important;
-    background-color: #2f354a !important;
-}
-
-.customcheck{
-      margin-top: 15px;
-      color: #ff9800 !important;
-      background-color: #2f354a !important;
-}
-
-#toast-container {
-    top: 9% !important;
-}
-
-.toast {
-    color: #ff9800 !important;
-    background-color: #2f354a !important;
 }
