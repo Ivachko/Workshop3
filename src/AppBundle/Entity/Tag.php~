@@ -82,4 +82,72 @@ class Tag
     {
         return $this->libelle;
     }
+
+    /**
+     * Add need
+     *
+     * @param \AppBundle\Entity\Need $need
+     *
+     * @return Tag
+     */
+    public function addNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs[] = $need;
+
+        return $this;
+    }
+
+    /**
+     * Remove need
+     *
+     * @param \AppBundle\Entity\Need $need
+     */
+    public function removeNeed(\AppBundle\Entity\Need $need)
+    {
+        $this->needs->removeElement($need);
+    }
+
+    /**
+     * Get needs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNeeds()
+    {
+        return $this->needs;
+    }
+
+    /**
+     * Add developpeur
+     *
+     * @param \AppBundle\Entity\Developpeur $developpeur
+     *
+     * @return Tag
+     */
+    public function addDeveloppeur(\AppBundle\Entity\Developpeur $developpeur)
+    {
+        $this->developpeurs[] = $developpeur;
+
+        return $this;
+    }
+
+    /**
+     * Remove developpeur
+     *
+     * @param \AppBundle\Entity\Developpeur $developpeur
+     */
+    public function removeDeveloppeur(\AppBundle\Entity\Developpeur $developpeur)
+    {
+        $this->developpeurs->removeElement($developpeur);
+    }
+
+    /**
+     * Get developpeurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDeveloppeurs()
+    {
+        return $this->developpeurs;
+    }
 }

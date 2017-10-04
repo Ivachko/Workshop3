@@ -58,9 +58,9 @@ class Client
     }
 
     /**
-     * One client has Many needs.
-     * @OneToMany(targetEntity="Contact", mappedBy="client")
-     */
+ * One client has Many needs.
+ * @OneToMany(targetEntity="Contact", mappedBy="client")
+ */
     private $contacts;
 
   

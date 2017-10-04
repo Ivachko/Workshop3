@@ -18,7 +18,7 @@ class NeedController extends Controller
      * Lists all need entities.
      *
      * @Route("/", name="need_index")
-     * @Route("/{toastr}", name="need_index_toastr")
+     *
      * @Method("GET")
      */
     public function indexAction($toastr = "")
@@ -67,7 +67,7 @@ class NeedController extends Controller
     /**
      * Finds and displays a need entity.
      *
-     * @Route("/n/{id}", name="need_show")
+     * @Route("/{id}", name="need_show")
      * @Method("GET")
      */
     public function showAction(Need $need)
