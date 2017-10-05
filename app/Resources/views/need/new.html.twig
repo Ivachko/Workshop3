@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
+{# form_div_layout.html.twig #}
 
 {% block content %}
     {{ form_start(form) }}
+
     <ul class="collapsible" data-collapsible="expandable">
         <li>
             <div class="collapsible-header" style="position:relative;">
@@ -101,11 +103,19 @@
                         <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.fullDescription) }}</span></div>
                     </li>
                     <li>
+
                         <div class="collapsible-header" style="position:relative;">
                             <i class="material-icons">folder</i>Tags <div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
                                 <i class="material-icons">keyboard_arrow_down</i></div></div>
                         <div class="collapsible-body grey lighten-4">
-                            {{ form_row(form.tags,{ 'attr': {'class': 'checkbox ','separator':'===='}}) }}
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s4">
+                                        {{ form_widget(form.tags) }}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </li>
                 </ul>
@@ -131,63 +141,49 @@
     <script>
         $(document).ready(function () {
             $(':input[name="appbundle_need[client]"]').on("change", function(){
-
-            contacturl = contacturl.replace("1",$(this).val());
-            $.ajax({
-
-                url: contacturl,
-                success: function(response){
-                    // Replace current position field ...
-                    $('#meetposition').replaceWith(
-                    var parse = jQuery.parseJSON(response)
-                    var $contactselect = $(':input[name="appbundle_need[contactName]"]');
-                    ($contactselect.html('<option>Contact :</option>'));
-
-                    for (var i=0, total = parse.length; i < total; i++) {
-
-                        $contactselect.append('<option value="' + parse[i].id + '"><span class="red-text">' + parse[i].name + '</span></option>');
-                    }
-                    $('select').material_select();
-
+                contacturl = contacturl.replace("1",$(this).val());
+                $.ajax({
+                    url: contacturl,
+                    success: function(response){
+                        // Replace current position field ...
+                        $('#meetposition').replaceWith(
+                        var parse = jQuery.parseJSON(response)
+                        var $contactselect = $(':input[name="appbundle_need[contactName]"]');
+                        ($contactselect.html('<option>Contact :</option>'));
+                        for (var i=0, total = parse.length; i < total; i++) {
+                            $contactselect.append('<option value="' + parse[i].id + '"><span class="red-text">' + parse[i].name + '</span></option>');
+                        }
+                        $('select').material_select();
                         $(html).find('#meetposition')
-                    );
-
-                }
+                        );
+                    }
+                });
             });
-        });
-        var contacturl = "{{ path('client_contact',{id:"1"}) }}";
-
+            var contacturl = "{{ path('client_contact',{id:"1"}) }}";
     </script>
     <script>
         $(document).ready(function () {
             $(':input[name="appbundle_need[client]"]').on("change", function(){
                 contacturl = contacturl.replace("1",$(this).val());
-
                 $.ajax({
-
                     url: contacturl,
                     success: function(response){
                         var parse = jQuery.parseJSON(response)
                         console.log(parse);
                         console.log(response);
                         var $contactselect = $(':input[name="appbundle_need[contactName]"]');
-
                         ($contactselect.html('<option>Contact :</option>'));
-
                         for (var i=0, total = parse.length; i < total; i++) {
-
                             $contactselect.append('<option value="' + parse[i].id + '"><span class="red-text">' + parse[i].name + '</span></option>');
                         }
                         $('select').material_select();
                     },
-
                 });
             })
         });
         var contacturl = "{{ path('client_contact',{id:"1"}) }}";
     </script>
     <script>
-
         $(".collapsible-header").click(function(){
             var chevron = $(this).children('div').children('i').html();
             if(chevron == "keyboard_arrow_down"){
