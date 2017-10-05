@@ -3,17 +3,57 @@
 {% block btn %}add{% endblock %}
 {% block content %}
     <div class="center filters">
-        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="status">Status
-            <i id="status" class="material-icons right ml5">arrow_drop_down</i>
+        <button class="btn nopadding {% if col == 'status' %}colorBackGFI{% else %}colorBackW{% endif %} orange-text noboxshadow" type="submit" name="status">Status
+            <i id="status" class="material-icons right ml5">
+                {% if col == 'status' %}
+                  {% if tri == 'ASC' %}
+                    arrow_drop_up
+                  {% else %}
+                    arrow_drop_down
+                  {% endif %}
+                {% else %}
+                  arrow_drop_down
+                {% endif %}
+              </i>
         </button>
-        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="title">Title
-            <i id="title" class="material-icons right ml5">arrow_drop_down</i>
+        <button class="btn nopadding {% if col == 'title' %}colorBackGFI{% else %}colorBackW{% endif %} orange-text noboxshadow" type="submit" name="title">Title
+            <i id="title" class="material-icons right ml5">
+              {% if col == 'title' %}
+                {% if tri == 'ASC' %}
+                  arrow_drop_up
+                {% else %}
+                  arrow_drop_down
+                {% endif %}
+              {% else %}
+                arrow_drop_down
+              {% endif %}
+            </i>
         </button>
-        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="date">Date
-            <i id="date" class="material-icons right ml5">arrow_drop_down</i>
+        <button class="btn nopadding {% if col == 'date' %}colorBackGFI{% else %}colorBackW{% endif %} orange-text noboxshadow" type="submit" name="date">Date
+            <i id="date" class="material-icons right ml5">
+              {% if col == 'date' %}
+                {% if tri == 'ASC' %}
+                  arrow_drop_up
+                {% else %}
+                  arrow_drop_down
+                {% endif %}
+              {% else %}
+                arrow_drop_down
+              {% endif %}
+            </i>
         </button>
-        <button class="btn nopadding colorBackW orange-text noboxshadow" type="submit" name="customer">Customer
-            <i id="customer" class="material-icons right ml5">arrow_drop_down</i>
+        <button class="btn nopadding {% if col == 'client' %}colorBackGFI{% else %}colorBackW{% endif %} orange-text noboxshadow" type="submit" name="customer">Customer
+            <i id="customer" class="material-icons right ml5">
+              {% if col == 'client' %}
+                {% if tri == 'ASC' %}
+                  arrow_drop_up
+                {% else %}
+                  arrow_drop_down
+                {% endif %}
+              {% else %}
+                arrow_drop_down
+              {% endif %}
+            </i>
         </button>
     </div>
 
@@ -58,6 +98,20 @@
 {% block script %}
     <script>
         $(document).ready(function(){
+          $('input.autocomplete').autocomplete({
+            data: {
+              {% for title in titles %}
+                "{{ title }}": null,
+              {% endfor %}
+            },
+            limit: 5,
+            onAutocomplete: function(val) {
+              var url = "{{ path('need_index', { 'srch': 'need_srch' }) }}";
+              url = url.replace("need_srch", val);
+              document.location.href = url;
+            },
+            minLength: 3,
+          });
 
             $("[id^='delete_']").click(function(){
                 var need = $(this).attr('need');
@@ -82,24 +136,62 @@
 
             $(".btn").click(function(){
                 var filtre = $(this).attr('name');
+                var tri = "";
+
                 if(filtre == "status" || filtre == "title" || filtre == "date" || filtre == "customer"){
-                    var tri = $(this).children('i').html();
+                    tri = $(this).children('i').html();
 
                     $('.btn').removeClass("colorBackGFI");
+                    $('.btn').addClass("colorBackW");
 
                     if(filtre != "status") { $('#status').html("arrow_drop_down"); }
                     if(filtre != "title") { $('#title').html("arrow_drop_down"); }
                     if(filtre != "date") { $('#date').html("arrow_drop_down"); }
                     if(filtre != "customer") { $('#customer').html("arrow_drop_down"); }
 
-                    if(tri == "arrow_drop_up"){
-                        tri = "arrow_drop_down";
+                    if(tri.indexOf("up") == -1){
+                        tri = tri.replace("down","up");
                     } else {
-                        tri = "arrow_drop_up";
+                        tri = tri.replace("up","down");
                     }
+
                     $(this).addClass('colorBackGFI');
                     $(this).children('i').html(tri);
                 }
+
+                var db_tri = "";
+                switch(tri.indexOf("up")) {
+                  case -1:
+                      db_tri = "DESC";
+                      break;
+                  default:
+                      db_tri = "ASC";
+                }
+
+                var db_col = "";
+                switch(filtre) {
+                  case "status":
+                      db_col = "status";
+                      break;
+                  case "title":
+                      db_col = "title";
+                      break;
+                  case "date":
+                      db_col = "date";
+                      break;
+                  case "customer":
+                      db_col = "client";
+                      break;
+                  default:
+                      db_col = "date";
+                  }
+
+                  var url = "{{ path('need_index', { 'col': 'need_col', 'tri': 'need_tri', }) }}";
+                  url = url.replace("need_col", db_col);
+                  url = url.replace("need_tri", db_tri);
+                  url = url.replace("amp;", "");
+
+                  document.location.href = url;
             });
 
         });

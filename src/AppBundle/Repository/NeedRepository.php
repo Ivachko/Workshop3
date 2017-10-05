@@ -10,4 +10,21 @@ namespace AppBundle\Repository;
  */
 class NeedRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function findAllOrderBy($col, $tri)
+    {
+        $qb = $this->createQueryBuilder('n')
+                   ->orderBy ('n.'.$col, $tri);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findByTitle($title)
+      {
+          $qb = $this->createQueryBuilder('n')
+                     ->Where('n.title = :searchTitle')
+                     ->setParameter('searchTitle', $title);
+          return $qb->getQuery()->setMaxResults(1)->getOneOrNullResult();
+      }
+
+
 }
