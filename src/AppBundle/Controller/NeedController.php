@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Need;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Need controller.
@@ -21,14 +22,20 @@ class NeedController extends Controller
      *
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $needs = $em->getRepository('AppBundle:Need')->findAll();
+        $request = Request::createFromGlobals();
+        $col = $request->query->get('col','date');
+        $tri = $request->query->get('tri','ASC');
+
+        $needs = $em->getRepository('AppBundle:Need')->findAllOrderBy($col, $tri);
 
         return $this->render('need/index.html.twig', array(
             'needs' => $needs,
+            'col' => $col,
+            'tri' => $tri,
         ));
     }
 

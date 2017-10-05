@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class NeedRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function findAllOrderBy($col, $tri)
+    {
+        $qb = $this->createQueryBuilder('n')
+                   ->orderBy ('n.'.$col, $tri);
+
+        return $qb->getQuery()->getResult();
+    }
 }
