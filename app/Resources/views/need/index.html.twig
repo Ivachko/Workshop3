@@ -98,6 +98,20 @@
 {% block script %}
     <script>
         $(document).ready(function(){
+          $('input.autocomplete').autocomplete({
+            data: {
+              {% for title in titles %}
+                "{{ title }}": null,
+              {% endfor %}
+            },
+            limit: 5,
+            onAutocomplete: function(val) {
+              var url = "{{ path('need_index', { 'srch': 'need_srch' }) }}";
+              url = url.replace("need_srch", val);
+              document.location.href = url;
+            },
+            minLength: 3,
+          });
 
             $("[id^='delete_']").click(function(){
                 var need = $(this).attr('need');

@@ -29,11 +29,27 @@ class NeedController extends Controller
         $request = Request::createFromGlobals();
         $col = $request->query->get('col','date');
         $tri = $request->query->get('tri','ASC');
+        $srch = $request->query->get('srch','');
+
+        if($srch != ""){
+          $need = $em->getRepository('AppBundle:Need')->findByTitle($srch);
+          $deleteForm = $this->createDeleteForm($need);
+          return $this->render('need/show.html.twig', array(
+              'need' => $need,
+              'delete_form' => $deleteForm->createView(),
+          ));
+        }
 
         $needs = $em->getRepository('AppBundle:Need')->findAllOrderBy($col, $tri);
 
+        $titles = array();
+        foreach ($needs as $need) {
+          $titles[] = $need->getTitle();
+        }
+
         return $this->render('need/index.html.twig', array(
             'needs' => $needs,
+            'titles' => $titles,
             'col' => $col,
             'tri' => $tri,
         ));
