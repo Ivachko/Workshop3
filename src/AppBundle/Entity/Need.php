@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 
 /**
  * Need
@@ -83,12 +86,7 @@ class Need
      */
     private $rate;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="consultantName", type="text")
-     */
-    private $consultantName;
+
 
     /**
      * @var int
@@ -130,20 +128,26 @@ class Need
      */
     private $factor3;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="needs")
-     * @ORM\JoinTable(name="needs_tags")
+     * Many Entity have Many Tag.
+     * @ManyToMany(targetEntity="Tag")
+     * @JoinTable(name="need_tag",
+     *      joinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="need_id", referencedColumnName="id")}
+     *      )
      */
     private $tags;
 
+    // ...
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-      {
-       $this->tags = new ArrayCollection();
+    public function __construct() {
+
+        $this->tags = new ArrayCollection();
     }
+
+
+
 
     /**
      * Get id
@@ -301,29 +305,7 @@ class Need
         return $this->rate;
     }
 
-    /**
-     * Set consultantName
-     *
-     * @param string $consultantName
-     *
-     * @return Need
-     */
-    public function setConsultantName($consultantName)
-    {
-        $this->consultantName = $consultantName;
 
-        return $this;
-    }
-
-    /**
-     * Get consultantName
-     *
-     * @return string
-     */
-    public function getConsultantName()
-    {
-        return $this->consultantName;
-    }
 
     /**
      * Set status
@@ -540,6 +522,8 @@ class Need
     {
         return $this->factor3;
     }
+
+
 
     /**
      * Add tag

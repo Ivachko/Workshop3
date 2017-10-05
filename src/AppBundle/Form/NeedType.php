@@ -3,8 +3,10 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Client;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,12 +36,18 @@ class NeedType extends AbstractType
             ->add('city')
             ->add('zipCode')
             ->add('rate')
-            ->add('consultantName')
-            ->add('status')
+
+            ->add('status',ChoiceType::class,[
+                'choices'=>[
+                    'Open'=>'1',
+                    'Win'=>'2',
+                    'Close'=>'3'
+                ]
+            ])
             ->add('factor1')
             ->add('factor2')
             ->add('factor3')
-
+            ->add('tags',EntityType::class,['class'=>'AppBundle\Entity\Tag','choice_label'=>'libelle','multiple'=>'true','expanded'=>'true'])
             ->add('client', EntityType::class,array(
                 'class'=>'AppBundle\Entity\Client',
                 'choice_label'=>'nom',

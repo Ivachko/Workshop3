@@ -60,8 +60,9 @@ swiftmailer:
     type: memory
   transport: "%mailer_transport%"
   username: "%mailer_user%"
-twig: 
-  debug: "%kernel.debug%"
+twig:
   form_themes:
-    - 'materialize_layout.html.twig'
+  - 'materialize_layout.html.twig'
+  debug: "%kernel.debug%"
+
   strict_variables: "%kernel.debug%"
