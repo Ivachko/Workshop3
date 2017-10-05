@@ -133,8 +133,8 @@ class Need
      * Many Entity have Many Tag.
      * @ManyToMany(targetEntity="Tag")
      * @JoinTable(name="need_tag",
-     *      joinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="need_id", referencedColumnName="id")}
+     *      joinColumns={@JoinColumn(name="need_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")}
      *      )
      */
     private $tags;
@@ -279,7 +279,7 @@ class Need
         return $this->startAt;
     }
 
-  
+
 
     /**
      * Set rate

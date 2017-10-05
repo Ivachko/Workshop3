@@ -132,11 +132,29 @@ class NeedController extends Controller
 
         }
 
-        $output = array_slice($result, -5);
+
+        $output = array();
+
+        while(count($result) > 0){
+          $max = 0;
+          foreach ($result as $key => $value) {
+            if($value > $max){
+              $max = $value;
+            }
+          }
+          foreach ($result as $key => $value) {
+            if($value == $max){
+              unset($result[$key]);
+              $output[$key] = $value;
+            }
+          }
+        }
+
+        $defoutput = array_slice($output, 0, 5);
 
         return $this->render('need/share.html.twig', array(
             'need' => $need,
-            'devsCompatibles' => $output,
+            'devsCompatibles' => $defoutput,
             'tagsCommuns' => $commonTags,
         ));
     }
