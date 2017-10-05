@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Need : {{ need.id }}{% endblock %}
-{% block btn %}delete{% endblock %}
+{% block btn %}<a href="{{ path('need_delete', {'id': need.id}) }}" btn-floating btn-large colorBackGFI addNeed noboxshadow"><i class="material-icons orange-text">delete</i></a>{% endblock %}
 {% block content %}
 
 
@@ -190,19 +190,7 @@
 
     </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('need_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('need_edit', { 'id': need.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
 
 
 {% endblock %}

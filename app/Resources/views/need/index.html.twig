@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Needs{% endblock %}
-{% block btn %}add{% endblock %}
+{% block btn %}<a href="{{ path('need_new') }}" class="btn-floating btn-large colorBackGFI addNeed noboxshadow"><i class="material-icons orange-text">add</i></a>{% endblock %}
 {% block content %}
     <div class="center filters">
         <button class="btn nopadding {% if col == 'status' %}colorBackGFI{% else %}colorBackW{% endif %} orange-text noboxshadow" type="submit" name="status">Status

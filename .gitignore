@@ -13,9 +13,12 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
-/vendor/
+
 /web/bundles/
 
 \.idea/
 /nbproject/private/
 /app/config/
+/nbproject/
+
+vendor/

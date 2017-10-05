@@ -21,7 +21,7 @@
         {% if is_granted("ROLE_USER") %}
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right">
-            <li> <a class="btn-floating btn-large colorBackGFI addNeed noboxshadow"><i class="material-icons orange-text">{% block btn %}{% endblock %}</i></a></li>
+            <li> {% block btn %}{% endblock %}</li>
         </ul>
         <ul class="side-nav" id="mobile-menu">
             <li><h5 class="colorGFI ml10"> {{ app.user.prenom }} {{ app.user.nom }} </h5></li>
