@@ -100,10 +100,18 @@
                                 <i class="material-icons">keyboard_arrow_down</i></div></div>
                         <div class="collapsible-body grey lighten-4"><span> {{ form_row(form.fullDescription) }}</span></div>
                     </li>
+                    <li>
+                        <div class="collapsible-header" style="position:relative;">
+                            <i class="material-icons">folder</i>Tags <div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
+                                <i class="material-icons">keyboard_arrow_down</i></div></div>
+                        <div class="collapsible-body grey lighten-4">
+                            {{ form_row(form.tags,{ 'attr': {'class': 'checkbox ','separator':'===='}}) }}
+                        </div>
+                    </li>
                 </ul>
             </div>
         </li>
-      
+
         <li>
             <div class="collapsible-header active" style="position:relative;">
                 <i class="material-icons">remove_red_eye</i>Status<div style="position:absolute;right:0;top: calc( 50% - 22px / 2 );">
