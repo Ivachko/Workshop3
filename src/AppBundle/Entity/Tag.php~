@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,11 +29,7 @@ class Tag
      */
     private $libelle;
 
-    /**
- 	   *
-     * @ORM\ManyToMany(targetEntity="Need", mappedBy="tags")
-     */
-    private $needs;
+   
 
     /**
  	   *
@@ -45,7 +42,7 @@ class Tag
      */
     public function __construct()
 	  {
-	     $this->needs = new ArrayCollection();
+
        $this->developpeurs = new ArrayCollection();
     }
 
@@ -83,39 +80,7 @@ class Tag
         return $this->libelle;
     }
 
-    /**
-     * Add need
-     *
-     * @param \AppBundle\Entity\Need $need
-     *
-     * @return Tag
-     */
-    public function addNeed(\AppBundle\Entity\Need $need)
-    {
-        $this->needs[] = $need;
 
-        return $this;
-    }
-
-    /**
-     * Remove need
-     *
-     * @param \AppBundle\Entity\Need $need
-     */
-    public function removeNeed(\AppBundle\Entity\Need $need)
-    {
-        $this->needs->removeElement($need);
-    }
-
-    /**
-     * Get needs
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getNeeds()
-    {
-        return $this->needs;
-    }
 
     /**
      * Add developpeur

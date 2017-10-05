@@ -34,7 +34,7 @@ class NeedType extends AbstractType
             ->add('city')
             ->add('zipCode')
             ->add('rate')
-            ->add('consultantName')
+
             ->add('status')
             ->add('factor1')
             ->add('factor2')
