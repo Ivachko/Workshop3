@@ -1,6 +1,17 @@
-{% trans_default_domain 'FOSUserBundle' %}
-
+{% block content %}
 <div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+  <ul class="collection with-header">
+   <li class="collection-header"><h4>{{ user.username }}</h4></li>
+   <li class="collection-item"><b>Email:</b> {{ user.email }}</li>
+   <li class="collection-item"><b>Lastname:</b> {{ user.nom }}</li>
+   <li class="collection-item"><b>Firstname:</b> {{ user.prenom }}</li>
+   <li class="collection-item"><b>Last login:</b> {{user.lastlogin|date("m/d/Y - H:i:s", "Europe/Paris") }}</li>
+ </ul>
 </div>
+
+{% endblock %}
+{% block script %}
+  <script>
+    document.getElementById("logo-container").firstChild.innerHTML = "Your profile";
+  </script>
+{% endblock %}

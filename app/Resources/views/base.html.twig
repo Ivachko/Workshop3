@@ -26,7 +26,7 @@
         <ul class="side-nav" id="mobile-menu">
             <li><h5 class="colorGFI ml10"> {{ app.user.prenom }} {{ app.user.nom }} </h5></li>
             <li><a href="{{ path('need_index') }}" class="orange-text text-darken-3"><i class="material-icons orange-text">home</i>Home</a></li>
-            <li><a href="#" class="orange-text text-darken-3"><i class="material-icons orange-text">account_circle</i>Profile</a></li>
+            <li><a href="{{ path('need_index') }}" id="profile" class="orange-text text-darken-3"><i class="material-icons orange-text">account_circle</i>Profile</a></li>
             <li><a href="{{ path('client_index') }}" class="orange-text text-darken-3"><i class="material-icons orange-text">people</i>Customers</a></li>
             <li><a href="{{ path('fos_user_security_logout') }}" class="orange-text text-darken-3"><i class="material-icons orange-text">power_settings_new</i>Logout</a></li>
             <li><img src="{{ asset("gfi-logo.jpg") }}" class="circle black" style="width:90%;"></li>
@@ -48,6 +48,9 @@
 
 <script>
   $(document).ready(function(){ $(".button-collapse").sideNav();})
+  var url = "{{ path('need_index') }}";
+  url = url.replace("need", "profile");
+  $("#profile").attr("href", url);
 </script>
 {% block script %}{% endblock %}
 </body>
